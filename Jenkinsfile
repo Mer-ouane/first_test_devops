@@ -13,12 +13,7 @@ node {
         app = docker.build("mrben63/firstapp-test-pipeline")
     }
 
-    stage('Test image') {
-        
-        app.inside {
-            echo "Tests passed"
-        }
-    }
+  
 
     stage('Push image') {
         /* 
@@ -29,5 +24,12 @@ node {
             app.push("latest")
             } 
                 echo "Trying to Push Docker Build to DockerHub"
+    }
+	
+	  stage('Test image') {
+        
+        app.inside {
+            echo "Tests passed"
+        }
     }
 }
