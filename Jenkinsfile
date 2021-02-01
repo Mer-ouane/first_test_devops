@@ -1,4 +1,4 @@
-GI3_Pipeline {
+pipeline {
     def app
 
 
