@@ -1,6 +1,13 @@
-node {
+GI3_Pipeline {
     def app
 
+	agent any
+
+    triggers {
+        pollSCM '* * * * *'
+    }
+
+stages {
     stage('Clone repository') {
         /* Cloning the Repository to our Workspace */
 
@@ -32,6 +39,6 @@ node {
             } 
                 echo "Trying to Push Docker Build to DockerHub"
     }
-	
+}
 	  
 }
