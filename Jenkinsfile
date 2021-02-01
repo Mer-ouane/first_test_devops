@@ -17,7 +17,11 @@ node {
 	stage('Test image') {
         
         app.inside {
-            echo "Tests passed"
+		steps {
+                withDockerContainer (image: 'busybox') {    
+                         sh 'pwd'
+                }
+            	echo "Tests passed"
         }
     }
 	
