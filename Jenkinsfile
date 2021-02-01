@@ -1,7 +1,6 @@
 GI3_Pipeline {
     def app
 
-	agent any
 
     triggers {
         pollSCM '* * * * *'
