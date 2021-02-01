@@ -1,12 +1,6 @@
-pipeline {
+node {
     def app
 
-
-    triggers {
-        pollSCM '* * * * *'
-    }
-
-stages {
     stage('Clone repository') {
         /* Cloning the Repository to our Workspace */
 
@@ -38,6 +32,6 @@ stages {
             } 
                 echo "Trying to Push Docker Build to DockerHub"
     }
-}
+	
 	  
 }
