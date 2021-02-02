@@ -10,14 +10,14 @@ node {
     stage('Build image') {
         /* This builds the actual image */
 
-        app = docker.build("mrben63/firstapp-test-pipeline")
+        app = docker.build("mrben63/firstapp-test-pipeline:2")
     }
 
   
-	stage('Test image') {
+    stage('Test image') {
         
-        app.inside {
-		sh 'pwd'
+	//docker.image("....").inside("{{-v /var/jenkins/caches:/var/jenkins/caches") 
+        app.inside("{{-v /var/jenkins/caches:/var/jenkins/caches")  {
             	echo "Tests passed"
         }
     }
