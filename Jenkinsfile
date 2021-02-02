@@ -8,10 +8,10 @@ pipeline {
   tools {nodejs "node" }
   stages {
     stage('Cloning Git repository') {
-      steps {
+      /*steps {
         git 'https://github.com/Mer-ouane/first_test_devops'
-      }
-    //checkout scm
+      } */
+    checkout scm
 
     }
     stage('Build') {
