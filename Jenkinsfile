@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Cloning Git repository') {
       steps {
-        git 'https://github.com/Mer-ouane/first_test_devops.git'
+        git 'https://github.com/Mer-ouane/first_test_devops'
       }
     //checkout scm
 
