@@ -1,30 +1,49 @@
-node {
-    def app
+pipeline {
+  environment {
+    registry = "mrben63/firstapp-test-pipeline"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+  }
+  agent any
+  tools {nodejs "node" }
+  stages {
+    stage('Cloning Git repository') {
+      steps {
+        git 'https://github.com/Mer-ouane/first_test_devops.git'
+      }
+    //checkout scm
 
-    stage('Clone repository') {
-        /* Cloning the Repository to our Workspace */
-
-        checkout scm
     }
-
-    stage('Build image') {
-        /* This builds the actual image */
-
-        app = docker.build("mrben63/firstapp-test-pipeline")
+    stage('Build') {
+       steps {
+         sh 'npm install'
+       }
     }
-
-  
-	
-    stage('Push image') {
-        /* 
-			You would need to first register with DockerHub before you can push images to your account
-		*/
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-            } 
-                echo "Trying to Push Docker Build to DockerHub"
+    stage('Test') {
+      steps {
+        sh 'npm test'
+      }
     }
-	
-	  
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
+    stage('Deploy Image') {
+      steps{
+         script {
+            docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
+      }
+    }
+  }
 }
