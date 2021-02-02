@@ -10,7 +10,7 @@ node {
     stage('Build image') {
         /* This builds the actual image */
 
-        app = docker.build("mrben63/firstapp-test-pipeline:2")
+        app = docker.build("mrben63/firstapp-test-pipeline")
     }
 
   
