@@ -17,9 +17,8 @@ node {
     stage('Test image') {
         
 	//docker.image("....").inside("{{-v /var/jenkins/caches:/var/jenkins/caches") 
-        app.inside("{{-v /var/jenkins/caches:/var/jenkins/caches")  {
-            	echo "Tests passed"
-        }
+        sh "docker run -d -t -w /c/Windows/system32/config/systemprofile/AppData/Local/Jenkins/.jenkins/workspace/myFirstJob-Docker-build-Pipeline/ -v C:/Windows/system32/config/systemprofile/AppData/Local/Jenkins/.jenkins/workspace/myFirstJob-Docker-build-Pipeline/:/c/Windows/system32/config/systemprofile/AppData/Local/Jenkins/.jenkins/workspace/myFirstJob-Docker-build-Pipeline/ -v C:/Windows/system32/config/systemprofile/AppData/Local/Jenkins/.jenkins/workspace/myFirstJob-Docker-build-Pipeline@tmp/:/c/Windows/system32/config/systemprofile/AppData/Local/Jenkins/.jenkins/workspace/myFirstJob-Docker-build-Pipeline@tmp/ -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** mrben63/firstapp-test-pipeline cmd.exe"
+           
     }
 	
     stage('Push image') {
